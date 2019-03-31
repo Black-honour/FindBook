@@ -2,55 +2,169 @@ package com.example.entity;
 
 
 /**
- * @Author:wjup
+ * @Author:zrs
  * @Date: 2018/9/26 0026
  * @Time: 14:39
  */
 public class User {
-    private Integer id;
-    private String userName;
-    private String passWord;
-    private String realName;
- 
-    public Integer getId() {
+	private int id;
+
+    private String accid;
+
+    private String username;
+
+    private String password;
+
+    private String token;
+
+    //private String userPhoto;
+
+    private String sex;
+
+    private String birthday;
+
+    private String phone;
+
+    private String address;
+
+    private String signDesc;
+
+    private String email;
+
+    private String homeid;
+
+    private String state;
+
+    private String updateTime;
+
+    private String createTime;
+    
+
+    public int getId() {
         return id;
     }
- 
-    public void setId(Integer id) {
+
+    public void setId(int id) {
         this.id = id;
     }
- 
-    public String getUserName() {
-        return userName;
+
+    public String getAccid() {
+        return accid;
     }
- 
-    public void setUserName(String userName) {
-        this.userName = userName;
+
+    public void setAccid(String accid) {
+        this.accid = accid == null ? null : accid.trim();
     }
- 
-    public String getPassWord() {
-        return passWord;
+
+    public String getUsername() {
+        return username;
     }
- 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
- 
-    public String getRealName() {
-        return realName;
+
+    public String getPassword() {
+        return password;
     }
- 
-    public void setRealName(String realName) {
-        this.realName = realName;
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
- 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
-                ", realName='" + realName + '\'' +
-                '}';
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
+    }
+
+   // public String getUserPhoto() {
+   //     return userPhoto;
+  //  }
+
+   // public void setUserPhoto(String userPhoto) {
+   //     this.userPhoto = userPhoto == null ? null : userPhoto.trim();
+   // }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday == null ? null : birthday.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public String getSignDesc() {
+        return signDesc;
+    }
+
+    public void setSignDesc(String signDesc) {
+        this.signDesc = signDesc == null ? null : signDesc.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getHomeid() {
+        return homeid;
+    }
+
+    public void setHomeid(String homeid) {
+        this.homeid = homeid;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime == null ? null : updateTime.trim();
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime == null ? null : createTime.trim();
     }
 }

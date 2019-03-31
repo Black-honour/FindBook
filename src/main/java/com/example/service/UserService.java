@@ -1,7 +1,11 @@
 package com.example.service;
  
+//import com.example.entity.LoginReturnData;
 import com.example.entity.User;
+
 import com.example.mapper.UserMapper;
+import com.example.utils.ResultData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
@@ -11,10 +15,42 @@ import org.springframework.stereotype.Service;
  * @Time: 15:23
  */
 @Service
-public class UserService {
-    @Autowired
-    UserMapper userMapper;
-    public User Sel(int id){
-        return userMapper.Sel(id);
-    }
+public interface UserService {
+   
+	/**
+	 * 检查用户名是否存在
+	 * @param username 用户名
+	 * @return
+	 */
+	ResultData<User> checkUsername(String username) throws Exception;
+	
+	/**
+	 * 注册
+	 * @param session
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param nickName 昵称
+	 * @return
+	 */
+	ResultData<User> register(String accid,String username, String password) throws Exception;
+	
+	/**
+	 * 判断乡吧号是否已经被注册了
+	 * @param accid
+	 * @return
+	 */
+	Boolean isAlreadyRegistered(String accid);
+	
+	/**
+	 * 登录
+	 * @param session
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param checkCode 验证码
+	 * @return
+	 * @throws Exception
+	 */
+	//ResultData<LoginReturnData> login(String accid, String password) throws Exception;
+	
+	
 }

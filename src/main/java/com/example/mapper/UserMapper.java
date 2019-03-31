@@ -2,6 +2,10 @@ package com.example.mapper;
 
 
 import com.example.entity.User;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
  
@@ -12,8 +16,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserMapper {
-    User Sel(int id);
-    
-    
-    
+	User selectAccid(String accid);//查询用户id
+	
+	List<User> selectUsername(String Username);//查询用户名
+
+	void insert(User user);
+      
 }
