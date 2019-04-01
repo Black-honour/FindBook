@@ -20,10 +20,10 @@
     </resultMap>
  
     <select id="selectAccid" resultType="com.example.entity.User">
-        select * from user where accid = #{accid}
+        select * from user where accid = #{accid};
     </select>
     <select id="selectUsername" resultType="com.example.entity.User">
-        select *from user where username = #{username}
+        select *from user where username = #{username};
     </select>
     
     <insert id="insert" parameterType="com.example.entity.User">

@@ -6,6 +6,8 @@ import com.example.entity.User;
 import com.example.mapper.UserMapper;
 import com.example.utils.ResultData;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
@@ -50,7 +52,7 @@ public interface UserService {
 	 * @return
 	 * @throws Exception
 	 */
-	//ResultData<LoginReturnData> login(String accid, String password) throws Exception;
+	ResultData<User> login(String accid, String password) throws Exception;
 	
-	
+
 }

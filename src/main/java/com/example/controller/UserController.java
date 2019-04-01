@@ -8,6 +8,8 @@ import com.example.utils.ImgUtil;
 import com.example.utils.ResultData;
 import com.example.utils.TimeUtil;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class UserController {
 		//先判断书荒号是否已经被注册
 		if(userService.isAlreadyRegistered(accid)){
 			resultData.setCode(300);
-			resultData.setMsg("此乡吧号已经被注册");
+			resultData.setMsg("此书荒号已经被注册");
 			resultData.setSuccess(false);
 			return resultData;
 		}
@@ -61,6 +63,30 @@ public class UserController {
 			resultData.setSuccess(true);
 			return resultData;
 		}
+		return resultData;
+	}
+    
+    //登陆书荒号
+    /** 登录 */
+	@RequestMapping(value = "login", produces = { "application/json;charset=UTF-8" },
+			method = RequestMethod.POST)
+	public @ResponseBody
+	ResultData<User> login(
+			@RequestParam(value = "accid", required = true) String accid,
+			@RequestParam(value = "password", required = true) String password
+			) {
+		ResultData<User> resultData = new ResultData<>();
+		try {
+			resultData = userService.login(accid, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+			//LogUtils.error(e.toString());
+			resultData.setCode(-200);
+			resultData.setMsg("处理异常");
+			System.out.println(resultData);
+			return resultData;
+		}
+
 		return resultData;
 	}
 }

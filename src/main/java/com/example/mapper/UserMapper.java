@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 	User selectAccid(String accid);//查询用户id
 	
-	List<User> selectUsername(String Username);//查询用户名
+	List<User> selectUsername(String username);//查询用户名
 
 	void insert(User user);
       

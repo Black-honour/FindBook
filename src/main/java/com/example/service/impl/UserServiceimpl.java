@@ -20,14 +20,12 @@ public class UserServiceimpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-	
-	//@Resource
-	//private FriendMapper friendMapper;
 
 	@Override//检查用户名是否存在
 	public ResultData<User> checkUsername(String username) throws Exception {
 		ResultData<User> resultData = new ResultData<>();
 		List<User> user = getUserUsername(username);
+		
 		if (user == null||user.size()==0) {
 			resultData.setCode(0);
 			resultData.setMsg("用户名不存在");
@@ -48,6 +46,7 @@ public class UserServiceimpl implements UserService {
 			return true;
 	}
 	
+	//注册
 	public ResultData<User> register(String accid, String username,
 			String password) throws Exception {
 		ResultData<User> resultData = new ResultData<>();
@@ -59,8 +58,7 @@ public class UserServiceimpl implements UserService {
 		}
 		
 		List<User> haveuser = getUserUsername(username);
-		if (haveuser != null) {
-			// 用户名已经存在
+		if (haveuser!=null&&haveuser.size()!=0) {// 用户名已经存在
 			resultData.setCode(0);
 			resultData.setMsg("用户名已经存在");
 			resultData.setSuccess(false);
@@ -68,18 +66,9 @@ public class UserServiceimpl implements UserService {
 		}
 		
 		User user = new User();
-		//user.setHomeid(homeid);
-		//user.setPhone(phone);
 		user.setPassword(password);
 		user.setUsername(username);
 		user.setAccid(accid);
-		//user.setToken(password);
-		//user.setUserPhoto(userphoto);
-		//user.setSex(sex);
-		//user.setBirthday(birthday);
-		//user.setAddress(address);
-		//user.setSignDesc(describe);
-		//user.setCreateTime(TimeUtil.getCurrentTimeString());
 		userMapper.insert(user);// 插入到数据库
 		
 		resultData.setData(user);
@@ -89,6 +78,41 @@ public class UserServiceimpl implements UserService {
 		return resultData;
 		
 	}
+	
+	//登陆
+	public ResultData<User> login(String accid, String password) throws Exception{
+		ResultData<User> resultData = new ResultData<>();
+		if (StringUtils.isEmpty(accid) || StringUtils.isEmpty(password)) {
+			resultData.setCode(-100);
+			resultData.setMsg("请求参数不能为空");
+			resultData.setSuccess(false);
+			return resultData;
+		}
+		
+		User user = getUserAccid(accid);
+		if (user==null) {// 用户没有注册
+			resultData.setCode(-2);
+			resultData.setMsg("用户不存在");
+			resultData.setSuccess(false);
+			return resultData;
+		}
+		
+		if (!password.equals(user.getPassword())) {
+			// 密码错误
+			resultData.setCode(-1);
+			resultData.setMsg("密码不正确");
+			resultData.setSuccess(false);
+			return resultData;
+		}
+		
+		resultData.setCode(1);
+		resultData.setData(user);
+		resultData.setMsg("登陆成功");
+		resultData.setSuccess(true);
+		
+		return resultData;	
+	}
+	
 	 
 	private User getUserAccid(String accid) {//获取用户id
 		User user=new User();
