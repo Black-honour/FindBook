@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BookMapper">
+ 
+    <resultMap id="BaseResultMap" type="com.example.entity.Book">
+        <result column="bookid" jdbcType="INTEGER" property="bookid" />
+        <result column ="book_cover" jdbcType="VARCHAR" property="book_cover"/>
+        <result column="book_grade" jdbcType="INTEGER" property="book_grade" />
+        <result column="booklist_number" jdbcType="INTEGER" property="booklist_number" />
+        <result column="collect" jdbcType="INTEGER" property="collect" />
+        <result column="recommend" jdbcType="INTEGER" property="recommend" />
+        <result column="book_name" jdbcType="VARCHAR" property="book_name" />
+        <result column="auther" jdbcType="VARCHAR" property="auther" />
+        <result column="book_intro" jdbcType="VARCHAR" property="book_intro" />
+    </resultMap>
+    
+    <select id="selectBooksN" resultType="com.example.entity.Book">
+    select *from book limit 4,5;
+    </select>
+    
+    
+    
+    </mapper>

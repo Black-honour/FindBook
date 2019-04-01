@@ -112,16 +112,46 @@ public class UserServiceimpl implements UserService {
 		
 		return resultData;	
 	}
-	
+	//更新用户资料
+	public ResultData<User> updateUser(int id,String accid,String password,
+			String username,String sex,String birthday,String phone,
+			String province,String city,String signDesc,String email){
+		ResultData<User> resultData=new ResultData<>();
+		User user =  getUserId(id);
+		user.setAccid(accid);
+		user.setPassword(password);
+		user.setUsername(username);
+		user.setSex(sex);
+		user.setBirthday(birthday);
+		user.setPhone(phone);
+		user.setProvince(province);
+		user.setCity(city);
+		user.setSignDesc(signDesc);
+		user.setEmail(email);
+		userMapper.updateUser(user);
+		
+		resultData.setCode(1);
+		resultData.setMsg("更新资料成功");
+		resultData.setSuccess(true);
+		resultData.setData(user);
+		
+		return resultData;
+	}
 	 
-	private User getUserAccid(String accid) {//获取用户id
+	private User getUserAccid(String accid) {//获取用户名
 		User user=new User();
 		user=userMapper.selectAccid(accid);
 		return user;
 	}
 	
-	private List<User> getUserUsername(String username) {//获取用户名列表
+	private List<User> getUserUsername(String username) {//获取用户昵称列表
 		List<User> user=userMapper.selectUsername(username);
+		return user;
+	}
+	
+	private User getUserId(int id) {
+		User user=new User();
+		user=userMapper.selectId(id);
 		return user;
 	}
 }

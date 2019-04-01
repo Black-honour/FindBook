@@ -37,7 +37,7 @@ public interface UserService {
 	ResultData<User> register(String accid,String username, String password) throws Exception;
 	
 	/**
-	 * 判断乡吧号是否已经被注册了
+	 * 判断书荒号是否已经被注册了
 	 * @param accid
 	 * @return
 	 */
@@ -54,5 +54,12 @@ public interface UserService {
 	 */
 	ResultData<User> login(String accid, String password) throws Exception;
 	
+	/**
+	 * 更新用户资料
+	 * 
+	 */
+	ResultData<User> updateUser(int id,String accid,String password,String username,
+			String sex,String birthday,String phone,String province,
+			String city,String signDesc,String email)throws Exception;
 
 }

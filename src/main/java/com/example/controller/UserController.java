@@ -89,5 +89,38 @@ public class UserController {
 
 		return resultData;
 	}
+	
+	@RequestMapping(value = "update", produces = { "application/json;charset=UTF-8" },
+			method = RequestMethod.POST)
+	public @ResponseBody
+	ResultData<User> updateUser(
+			@RequestParam(value = "id", required = true) int id,//用户表中存储id
+			@RequestParam(value = "accid", required = true) String accid,//用户名			
+			@RequestParam(value = "password", required = true) String password,//密码
+			@RequestParam(value = "username", required = false) String username,//用户昵称
+			
+			@RequestParam(value = "sex", required = false) String sex,//性别
+			@RequestParam(value = "birthday", required = false) String birthday,//生日
+			@RequestParam(value = "phone", required = false) String phone,//生日
+			@RequestParam(value = "province", required = false) String province,//省份
+			@RequestParam(value = "city", required = false) String city,//城市
+			@RequestParam(value = "signDesc", required = false) String signDesc,//个性签名
+			@RequestParam(value = "email", required = false) String email//邮箱
+			) {
+		ResultData<User> resultData= new ResultData<>();
+		try {
+			resultData = userService.updateUser(id,accid,password,username,
+					sex,birthday,phone,province,city,signDesc,email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			//LogUtils.error(e.toString());
+			resultData.setCode(-200);
+			resultData.setMsg("处理异常");
+			System.out.println(resultData);
+			return resultData;
+		}
+		return resultData;
+	}
+	
 }
 

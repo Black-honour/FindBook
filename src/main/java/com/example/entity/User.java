@@ -15,9 +15,7 @@ public class User {
 
     private String password;
 
-    private String token;
-
-    //private String userPhoto;
+    private String userPhoto;
 
     private String sex;
 
@@ -25,19 +23,13 @@ public class User {
 
     private String phone;
 
-    private String address;
+    private String province;
+    
+    private String city;
 
     private String signDesc;
 
     private String email;
-
-    private String homeid;
-
-    private String state;
-
-    private String updateTime;
-
-    private String createTime;
     
 
     public int getId() {
@@ -71,22 +63,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
-
-    public String getToken() {
-        return token;
+/**
+    public String getUserPhoto() {
+        return userPhoto;
     }
 
-    public void setToken(String token) {
-        this.token = token == null ? null : token.trim();
-    }
-
-   // public String getUserPhoto() {
-   //     return userPhoto;
-  //  }
-
-   // public void setUserPhoto(String userPhoto) {
-   //     this.userPhoto = userPhoto == null ? null : userPhoto.trim();
-   // }
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto == null ? null : userPhoto.trim();
+    }*/
 
     public String getSex() {
         return sex;
@@ -112,12 +96,20 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getAddress() {
-        return address;
+    public String getProvince() {
+        return province;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+    
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city== null ? null : city.trim();
     }
 
     public String getSignDesc() {
@@ -136,35 +128,4 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getHomeid() {
-        return homeid;
-    }
-
-    public void setHomeid(String homeid) {
-        this.homeid = homeid;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime == null ? null : updateTime.trim();
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
-    }
 }

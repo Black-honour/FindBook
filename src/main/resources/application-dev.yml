@@ -14,7 +14,9 @@ mybatis:
  
 #showSql
 logging:
+  file: my.log 
   level:
     com:
       example:
         mapper : debug
+        service: debug

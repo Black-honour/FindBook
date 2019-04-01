@@ -7,16 +7,13 @@
         <result column ="accid" jdbcType="VARCHAR" property="accid"/>
         <result column="username" jdbcType="VARCHAR" property="username" />
         <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="token" jdbcType="VARCHAR" property="token" />
         <result column="sex" jdbcType="VARCHAR" property="sex" />
         <result column="birthday" jdbcType="VARCHAR" property="birthday" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
-        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
         <result column="signDesc" jdbcType="VARCHAR" property="signDesc" />
         <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="homeid" jdbcType="VARCHAR" property="homid" />
-        <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
-        <result column="createTime" jdbcType="VARCHAR" property="createTime" />
     </resultMap>
  
     <select id="selectAccid" resultType="com.example.entity.User">
@@ -25,21 +22,30 @@
     <select id="selectUsername" resultType="com.example.entity.User">
         select *from user where username = #{username};
     </select>
+    <select id="selectId" resultType="com.example.entity.User">
+        select *from user where id=#{id};
+    </select>
     
     <insert id="insert" parameterType="com.example.entity.User">
          insert into user 
-         (id, accid,username,password,token,sex,birthday,
-         phone,address,signDesc,email,homeid,state,updateTime,
-         createTime
-         ) 
+         (id, accid,username,password,sex,birthday,
+         phone,province,city,signDesc,email) 
          values 
-         (#{id,jdbcType=INTEGER}, #{accid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+         (#{id,jdbcType=INTEGER}, #{accid,jdbcType=VARCHAR},
+          #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{signDesc,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{homeid,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR})
+      #{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},
+       #{signDesc,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
     </insert>
+    
+    <update id ="updateUser" parameterType="com.example.entity.User">
+    update user set 
+    accid=#{accid},password=#{password},sex=#{sex},
+    birthday=#{birthday},phone=#{phone},province=#{province},
+    city=#{city},signDesc=#{signDesc},email=#{email}
+    where id=#{id}
+    </update>
     
     
     
