@@ -90,6 +90,7 @@ public class UserController {
 		return resultData;
 	}
 	
+	//更新用户信息
 	@RequestMapping(value = "update", produces = { "application/json;charset=UTF-8" },
 			method = RequestMethod.POST)
 	public @ResponseBody

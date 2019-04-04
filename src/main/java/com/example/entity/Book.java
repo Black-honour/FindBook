@@ -3,13 +3,21 @@ package com.example.entity;
 public class Book {
 
 	private int bookid;//书籍id
+	
 	private String book_cover;//书籍封面
+	
 	private int book_grade;//书籍评分
+	
 	private int booklist_number;//书籍所属书单数
+	
 	private int collect;//书籍收藏数
+	
 	private int recommend;//书籍推荐数
+	
 	private String book_name;//书籍名称
+	
 	private String auther;//书籍作者
+	
 	private String book_intro;//书籍简介
 	
 	public void setBookid(int bookid) {
