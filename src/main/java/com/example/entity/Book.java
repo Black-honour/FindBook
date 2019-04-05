@@ -2,25 +2,25 @@ package com.example.entity;
 
 public class Book {
 
-	private int bookid;//书籍id
+	private Integer bookid;//书籍id
 	
 	private String book_cover;//书籍封面
 	
-	private int book_grade;//书籍评分
+	private Integer book_grade;//书籍评分
 	
-	private int booklist_number;//书籍所属书单数
+	private Integer booklist_number;//书籍所属书单数
 	
-	private int collect;//书籍收藏数
+	private Integer collect;//书籍收藏数
 	
-	private int recommend;//书籍推荐数
+	private Integer recommend;//书籍推荐数
 	
 	private String book_name;//书籍名称
 	
-	private String auther;//书籍作者
+	private String author;//书籍作者
 	
 	private String book_intro;//书籍简介
 	
-	public void setBookid(int bookid) {
+	public void setBookid(Integer bookid) {
 		this.bookid=bookid;
 	}
 	
@@ -36,7 +36,7 @@ public class Book {
 		return book_cover;
 	}
 	
-	public void setBook_grade(int book_grade) {
+	public void setBook_grade(Integer book_grade) {
 		this.book_grade=book_grade;
 	}
 	
@@ -44,7 +44,7 @@ public class Book {
 		return book_grade;
 	}
 	
-	public void setBooklist_number(int booklist_number) {
+	public void setBooklist_number(Integer booklist_number) {
 		this.booklist_number=booklist_number;
 	}
 	
@@ -52,7 +52,7 @@ public class Book {
 		return booklist_number;
 	}
 	
-	public void setCollect(int collect) {
+	public void setCollect(Integer collect) {
 		this.collect=collect;
 	}
 	
@@ -60,7 +60,7 @@ public class Book {
 		return collect;
 	}
 	
-	public void setRecommend(int recommend) {
+	public void setRecommend(Integer recommend) {
 		this.recommend=recommend;
 	}
 	
@@ -76,12 +76,12 @@ public class Book {
 		return book_name;
 	}
 	
-	public void setAuther(String auther) {
-		this.auther=auther;
+	public void setAuther(String author) {
+		this.author=author;
 	}
 	
 	public String getAuther() {
-		return auther;
+		return author;
 	}
 	
 	public void setBook_intro(String book_intro) {

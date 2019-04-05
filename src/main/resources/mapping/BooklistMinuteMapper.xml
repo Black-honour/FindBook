@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BooklistMinuteMapper">
+ 
+    <resultMap id="BaseResultMap" type="com.example.entity.BooklistMinute">
+        <result column="booklist_id" jdbcType="INTEGER" property="booklist_id" />
+        <result column ="bookid" jdbcType="INTEGER" property="bookid"/>
+        <result column="book_name" jdbcType="VARCHAR" property="book_name" />
+        <result column="book_cover" jdbcType="VARCHAR" property="book_cover" />
+        <result column="auther" jdbcType="VARCHAR" property="auther" />    
+        <result column="book_intro" jdbcType="VARCHAR" property="book_intro" />
+    </resultMap>
+    
+    <select id="selectBooklist" resultType="com.example.entity.BooklistMinute">
+    select *from booklistminute where
+    booklist_id=#{booklist_id}
+    </select>
+    
+    <delete id="deleteBooklistBook" parameterType="Map">
+    delete from booklistminute where 
+    booklist_id=#{booklist_id}
+    and bookid=#{bookis}
+    </delete>
+    
+    <inter id ="addBooklistBook" parameterType="Map">
+    inter into booklistMinute
+    (booklist_id,bookid,book_name,book_cover,book_intro,auther)
+    values
+    (#{booklist_id},#{bookid},#{book_name},#{book_cover},#{book_intro},#{auther})
+    
+    </inter>
+    
+    </mapper>

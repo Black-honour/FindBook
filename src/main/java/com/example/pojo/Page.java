@@ -20,6 +20,10 @@ public class Page {
 	private boolean hasNextPage;//是否有下一页
 	private int endIndex;
 	
+	public Page() {
+		
+	}
+	
 	public int getEndIndex() {
 		return endIndex;
 	}

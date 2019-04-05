@@ -19,15 +19,16 @@ public class BookServiceimpl implements BookService {
 	public ResultData<List<Book>> getBooks(int n){//返回n本书
 		ResultData<List<Book>> resultData=new ResultData<List<Book>>();
 		
-		List<Book> books=bookMapper.selectBooksN(n);
+		List<Book> books=bookMapper.selectBooksN();
 		
 		resultData.setCode(1);
-		resultData.setMsg("返回n本书成功");
+		resultData.setMsg("返回5本书成功");
 		resultData.setSuccess(true);
 		resultData.setData(books);
 		return resultData;
 	}
 	
+	//根据书名搜书
 	@Override
 	public ResultData<Book> selectBookname(String book_name){
 		ResultData<Book> resultData=new ResultData<>();
@@ -43,8 +44,10 @@ public class BookServiceimpl implements BookService {
 	
 	
 	@Override
-	public ResultData<Book> addBook(int bookid,String book_cover,int book_grade,int booklist_number,
-			int collect,int recommend,String book_name,String auther,String book_intro){
+	public ResultData<Book> addBook(Integer bookid,String book_cover,Integer book_grade,
+			Integer booklist_number,
+			Integer collect,Integer recommend,String book_name,String author,
+			String book_intro){
 		ResultData<Book> resultData=new ResultData<>();
 		Book book=new Book();
 		
@@ -55,7 +58,7 @@ public class BookServiceimpl implements BookService {
 		book.setCollect(collect);
 		book.setRecommend(recommend);
 		book.setBook_name(book_name);
-		book.setAuther(auther);
+		book.setAuther(author);
 		book.setBook_intro(book_intro);
 		bookMapper.insertBook(book);
 		
@@ -66,7 +69,7 @@ public class BookServiceimpl implements BookService {
 		return resultData;
 	}
 
-	@Override
+	@Override//删除书籍
 	public ResultData<Book> deleteBook(int bookid){
 		ResultData<Book> resultData=new ResultData<Book>();
 		Book book=new Book();
@@ -84,7 +87,7 @@ public class BookServiceimpl implements BookService {
 	//更新书籍所有信息
 	@Override
 	public ResultData<Book> updateBook(int bookid,String book_cover,int book_grade,int booklist_number,
-			int collect,int recommend,String book_name,String auther,String book_intro
+			int collect,int recommend,String book_name,String author,String book_intro
 			){
 		ResultData<Book> resultData=new ResultData<Book>();
 		
@@ -98,7 +101,7 @@ public class BookServiceimpl implements BookService {
 		book.setCollect(collect);
 		book.setRecommend(recommend);
 		book.setBook_name(book_name);
-		book.setAuther(auther);
+		book.setAuther(author);
 		book.setBook_intro(book_intro);
 		
 		bookMapper.updateBook(book);

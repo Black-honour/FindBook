@@ -58,8 +58,8 @@ public interface UserService {
 	 * 更新用户资料
 	 * 
 	 */
-	ResultData<User> updateUser(int id,String accid,String password,String username,
-			String sex,String birthday,String phone,String province,
-			String city,String signDesc,String email)throws Exception;
+	ResultData<User> updateUser(int id,String accid,String password,
+			String username,String sex,String birthday,String phone,
+			String province,String city,String signDesc,String email)throws Exception;
 
 }

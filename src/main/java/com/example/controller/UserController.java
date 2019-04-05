@@ -109,9 +109,11 @@ public class UserController {
 			@RequestParam(value = "email", required = false) String email//邮箱
 			) {
 		ResultData<User> resultData= new ResultData<>();
+	
 		try {
-			resultData = userService.updateUser(id,accid,password,username,
-					sex,birthday,phone,province,city,signDesc,email);
+			resultData = userService.updateUser(id,accid, password,
+					 username,sex,birthday,phone,
+					 province, city, signDesc, email);
 		} catch (Exception e) {
 			e.printStackTrace();
 			//LogUtils.error(e.toString());
