@@ -1,27 +1,27 @@
 package com.example.entity;
 
 public class Post {
-    private Integer id;
+    private Integer id;//帖子id
 
-    private String useraccount;
+    private String accid;//用户名
     
-    private String username;
+    private String username;//
 
-    private String userphoto;
+    private String userphoto;//头像
 
-    private String title;
+    private String title;//标题
 
-    private String content;
+    private String content;//内容
 
-    private String contentImg;
+    private String contentImg;//内容图片
 
-    private String currentPosition;
+    private String currentPosition;//帖子位置
 
-    private String createTime;
+    private String createTime;//创建时间
 
     private String commentNum;//评论数目
 
-    private Integer forumId;
+    private Integer forumId;//论坛id
 
     public Integer getId() {
         return id;
@@ -31,12 +31,12 @@ public class Post {
         this.id = id;
     }
 
-    public String getUseraccount() {
-        return useraccount;
+    public String getAccid() {
+        return accid;
     }
 
-    public void setUseraccount(String useraccount) {
-        this.useraccount = useraccount == null ? null : useraccount.trim();
+    public void setAccid(String accid) {
+        this.accid = accid == null ? null : accid.trim();
     }
     
     public String getUsername() {

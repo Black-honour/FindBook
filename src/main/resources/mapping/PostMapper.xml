@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PostMapper">
+ 
+    <resultMap id="BaseResultMap" type="com.example.entity.Post">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column ="accid" jdbcType="VARCHAR" property="accid"/>
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="contentImg" jdbcType="VARCHAR" property="contentImg" />
+        <result column="currentPosition" jdbcType="VARCHAR" property="currentPosition" />
+        <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+         <result column="commentNum" jdbcType="INTEGER" property="commentNum" />
+        <result column="forumId" jdbcType="INTEGER" property="forumId" />
+    </resultMap>
+    <select id ="countByExample" resultType="java.lang.Integer">
+    selcet count(1) from post where id =#{id}
+    </select>
+    
+    <delect id ="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post
+    where id = #{id,jdbcType=INTEGER}
+    </delect>
+    
+    <select id ="selectByPrimaryKey"  parameterType="java.lang.Integer" resultType="com.exmaple.entity.post">
+    select *from post where id =#{id}
+    </select>
+    
+    <insert id="insert" parameterType="com.lqm.home.po.Post" >
+    insert into post (id, useraccount,username, userphoto, 
+      title, content, content_img, 
+      current_position, create_time, comment_num, 
+      village_id)
+    values (#{id,jdbcType=INTEGER}, #{useraccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{contentImg,jdbcType=VARCHAR}, 
+      #{currentPosition,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{commentNum,jdbcType=VARCHAR}, 
+      #{villageId,jdbcType=INTEGER})
+  </insert>
+  
+  <insert id ="insertList" parameterType="com.example.entity.Post">
+  insert into post (id, useraccount,username, userphoto, 
+      title, content, content_img, 
+      current_position, create_time, comment_num, 
+      village_id) values
+  <foreach collection="list" item="post" open="(" close=")" separator=",">
+  #{id,jdbcType=INTEGER}, #{useraccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{contentImg,jdbcType=VARCHAR}, 
+      #{currentPosition,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{commentNum,jdbcType=VARCHAR}, 
+      #{villageId,jdbcType=INTEGER}
+      </foreach>
+  </insert>
+  
+  <update id ="updateByExample"  parameterType="map">
+  update post
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.accid != null" >
+        accid = #{record.accid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userphoto != null" >
+        userphoto = #{record.userphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentImg != null" >
+        contentImg = #{record.contentImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentPosition != null" >
+        currentPosition = #{record.currentPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        createTime = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentNum != null" >
+        commentNum = #{record.commentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forumId != null" >
+        forumId = #{record.forumId,jdbcType=INTEGER},
+      </if>
+    </set>
+  </update>
+    
+    </mapper>

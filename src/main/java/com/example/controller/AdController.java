@@ -28,7 +28,8 @@ public class AdController {
 	/***
 	 * 获取广告列表
 	 */
-	@RequestMapping(value = "getAds", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.GET)
+	@RequestMapping(value = "getAds", produces = { "application/json;charset=UTF-8" }, 
+			method = RequestMethod.GET)
 	@ResponseBody
 	public ResultData<List<Ad>> getAds() throws Exception {
 		int []ad=new int[4];
