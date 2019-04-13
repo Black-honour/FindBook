@@ -32,7 +32,7 @@ public class Book {
 		this.book_cover=book_cover;
 	}
 	
-	public String getBook_cover(String book_cover) {
+	public String getBook_cover() {
 		return book_cover;
 	}
 	
@@ -76,11 +76,11 @@ public class Book {
 		return book_name;
 	}
 	
-	public void setAuther(String author) {
+	public void setAuthor(String author) {
 		this.author=author;
 	}
 	
-	public String getAuther() {
+	public String getAuthor() {
 		return author;
 	}
 	

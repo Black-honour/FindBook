@@ -27,13 +27,26 @@ public class BookServiceimpl implements BookService {
 		resultData.setData(books);
 		return resultData;
 	}
+	//
+	@Override
+	public ResultData<List<Book>> getBooks(String author){//返回n本书
+		ResultData<List<Book>> resultData=new ResultData<List<Book>>();
+		
+		List<Book> books=bookMapper.selectBooksA(author);
+		
+		resultData.setCode(1);
+		resultData.setMsg("返回作者书列表成功");
+		resultData.setSuccess(true);
+		resultData.setData(books);
+		return resultData;
+	}
 	
 	//根据书名搜书
 	@Override
 	public ResultData<Book> selectBookname(String book_name){
 		ResultData<Book> resultData=new ResultData<>();
 		Book book=new Book();
-		book=getBook(book_name);
+		book=getBookname(book_name);
 		
 		resultData.setCode(1);
 		resultData.setData(book);
@@ -43,37 +56,16 @@ public class BookServiceimpl implements BookService {
 	}
 	
 	
-	@Override
-	public ResultData<Book> addBook(Integer bookid,String book_cover,Integer book_grade,
-			Integer booklist_number,
-			Integer collect,Integer recommend,String book_name,String author,
-			String book_intro){
-		ResultData<Book> resultData=new ResultData<>();
-		Book book=new Book();
-		
-		book.setBookid(bookid);
-		book.setBook_cover(book_cover);
-		book.setBook_grade(book_grade);
-		book.setBooklist_number(booklist_number);
-		book.setCollect(collect);
-		book.setRecommend(recommend);
-		book.setBook_name(book_name);
-		book.setAuther(author);
-		book.setBook_intro(book_intro);
-		bookMapper.insertBook(book);
-		
-		resultData.setCode(1);
-		resultData.setData(book);
-		resultData.setMsg("添加书籍成功");
-		resultData.setSuccess(true);
-		return resultData;
+	@Override//添加书籍
+	public int addBook(Book book){
+		return bookMapper.insertBook(book);
 	}
 
 	@Override//删除书籍
 	public ResultData<Book> deleteBook(int bookid){
 		ResultData<Book> resultData=new ResultData<Book>();
 		Book book=new Book();
-		book=getBook(bookid);
+		book=getBookid(bookid);
 		
 		bookMapper.deleteBook(bookid);
 		
@@ -93,7 +85,7 @@ public class BookServiceimpl implements BookService {
 		
 		Book book =new Book();
 		
-		book=getBook(bookid);
+		book=getBookid(bookid);
 		
 		book.setBook_cover(book_cover);
 		book.setBook_grade(book_grade);
@@ -101,7 +93,7 @@ public class BookServiceimpl implements BookService {
 		book.setCollect(collect);
 		book.setRecommend(recommend);
 		book.setBook_name(book_name);
-		book.setAuther(author);
+		book.setAuthor(author);
 		book.setBook_intro(book_intro);
 		
 		bookMapper.updateBook(book);
@@ -114,13 +106,13 @@ public class BookServiceimpl implements BookService {
 		
 	}
 	
-	private Book getBook(int bookid) {
-		Book book=new Book();
-		book=bookMapper.selectBookid(bookid);
-		return book;
+	
+	private Book getBookid(int bookid) {
+		return bookMapper.selectBookid(bookid);
+		
 	}
 	
-	private Book getBook(String book_name) {
+	private Book getBookname(String book_name) {
 		Book book=new Book();
 		book=bookMapper.selectBookname(book_name);
 		return book;

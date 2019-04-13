@@ -8,12 +8,10 @@ import org.apache.ibatis.annotations.Param;
 
 public interface BooklistMinuteMapper {
 
-	List<BooklistMinute> selectBooklist(Integer booklist_id);//查询书单详情
+	//List<BooklistMinute> selectBooklist(Integer booklist_id);//查询书单详情
 	
 	void deleteBooklistBook(@Param("booklist_id")Integer booklist_id,@Param("bookid")Integer bookid);
 	
 	void addBooklistBook(BooklistMinute booklistMinute);
-	
-	
-	
+
 }

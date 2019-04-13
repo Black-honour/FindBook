@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.entity.Book;
 import com.example.entity.Booklist;
 import com.example.entity.BooklistMinute;
 import com.example.mapper.BookMapper;
@@ -21,13 +22,16 @@ public class BooklistServiceimpl implements BooklistService{
 	private BooklistMapper booklistMapper;
 	
 	@Autowired
+	private BookMapper bookMapper;
+	
+	@Autowired
 	private BooklistMinuteMapper booklistminuteMapper;
 
-	@Override
+	/*@Override
 	public ResultData<List<Booklist>> ReturnBooklists(){
 		ResultData<List<Booklist>> resultData=new ResultData<>();
 		return resultData;
-	}
+	}*/
 	
 	@Override//根据id搜索书单
 	public ResultData<Booklist> selectBooklistI(Integer booklist_id){
@@ -60,6 +64,7 @@ public class BooklistServiceimpl implements BooklistService{
 		ResultData<Booklist> resultData=new ResultData<>();
 		
 		booklistMapper.interBooklist(booklist);
+		
 		resultData.setCode(1);
 		resultData.setMsg("新建书单成功");
 		resultData.setSuccess(true);
@@ -83,6 +88,16 @@ public class BooklistServiceimpl implements BooklistService{
 		
 	}
 	
+	@Override
+	public Boolean isnewBooklistname(String booklist_name) {
+		Booklist booklist=booklistMapper.selectBooklistName(booklist_name);
+		if(booklist==null) {
+			return false;
+		}
+		else
+			return true;
+	}
+
 	@Override//书单中添加图书
 	public ResultData<BooklistMinute> interBooklistMinute(BooklistMinute booklistminute){
 		ResultData<BooklistMinute> resultData=new ResultData<>();
@@ -99,10 +114,19 @@ public class BooklistServiceimpl implements BooklistService{
 	public ResultData<BooklistMinute> deleteBooklistMinute(Integer booklist_id,Integer bookid){
 		ResultData<BooklistMinute> resultData=new ResultData<>();
 		booklistminuteMapper.deleteBooklistBook(booklist_id, bookid);
-		resultData.setCode(1);
-		resultData.setMsg("删除成功");
-		resultData.setSuccess(true);
-		return resultData;
+		Book book=bookMapper.selectBookid(bookid);
+		if(book==null) {
+		   resultData.setCode(1);
+		   resultData.setMsg("删除成功");
+		   resultData.setSuccess(true);
+		   return resultData;
+		}
+		else {
+			resultData.setCode(-2);
+			resultData.setMsg("删除失败");
+			resultData.setSuccess(true);
+			return resultData;
+		}
 	}
 	
 }

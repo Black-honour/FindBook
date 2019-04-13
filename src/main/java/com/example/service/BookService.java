@@ -10,13 +10,12 @@ import com.example.utils.ResultData;
 @Service
 public interface BookService {
 	
-	ResultData<List<Book>> getBooks(int n);//返回n本书
+ResultData<List<Book>> getBooks(int n);//返回n本书
 	
-	//ResultData<List<Book>> getBooks(String auther);//搜索作者名的书列表
+	ResultData<List<Book>> getBooks(String auther);//搜索作者名的书列表
 	
-	ResultData<Book> addBook(Integer bookid,String book_cover,Integer book_grade,
-			Integer booklist_number,Integer collect,Integer recommend,
-			String book_name,String author,String book_intro);
+	//ResultData<Book> addBook(Book book);
+	int addBook(Book book);
 	//增加书籍
 	
 	ResultData<Book> deleteBook(int bookid);//删除书籍

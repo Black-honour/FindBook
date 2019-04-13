@@ -17,7 +17,7 @@ public interface BookMapper {
 	
 	List<Book> selectBooksA(String auther);//根据作者搜索所有书籍
 	
-	void insertBook(Book book);//插入书籍
+	int insertBook(Book book);//插入书籍
 	
 	void deleteBook(Integer bookid);//删除书籍
 	

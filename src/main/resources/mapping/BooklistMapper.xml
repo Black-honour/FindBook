@@ -2,30 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.BooklistMapper">
  
+    
     <resultMap id="BaseResultMap" type="com.example.entity.Booklist">
-        <result column="booklist_id" jdbcType="INTEGER" property="bookid" />
-        <result column ="booklist_cover" jdbcType="VARCHAR" property="book_cover"/>
-        <result column="booklist_name" jdbcType="VARCHAR" property="book_name" />
-        <result column="booklist_intro" jdbcType="VARCHAR" property="book_intro" />
+        <result column="booklist_id" jdbcType="INTEGER" property="booklist_id" />
+        <result column ="booklist_cover" jdbcType="VARCHAR" property="booklist_cover"/>
+        <result column="booklist_name" jdbcType="VARCHAR" property="booklist_name" />
+        <result column="booklist_intro" jdbcType="VARCHAR" property="booklist_intro" />
+        <result column="booklist_author" jdbcType="VARCHAR" property="booklist_author" />
+        <result column="booklist_userid" jdbcType="INTEGER" property="booklist_userid" />       
     </resultMap>
     
-    <select id="selectBooklistId" resultType="com.example.entity.Booklist">
+   <!--<select id="selectBooklistId" resultType="com.example.entity.Booklist">
     select *from booklist where 1=1
      <if test="booklist_id!=null">
           and booklist_id = #{booklist_id}
          </if>
+    </select>-->
+    <select id="selectBooklistId" resultType="com.example.entity.Booklist">
+    select *from booklist where booklist_id=#{booklist_id}
     </select>
     
     <select id="selectBooklistName" resultType="com.example.entity.Booklist">
-    select *from booklist where 1=1
-    <if test="booklist_name!=null">
-          and booklist_name = #{booklist_name}
-         </if>
-    </select>
+    select *from booklist where booklist_name=#{booklist_name}
+    </select><!--
     
     <select id="selectBooklists" resultType="com.example.entity.Booklist">
     select *from booklist limit 4,5;
-    </select>
+    </select>-->
     
+    <insert id="interBooklist" parameterType="com.example.entity.Booklist">
+    <selectKey keyProperty="booklist_id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+         insert into booklist
+         (booklist_cover,booklist_name,booklist_intro,booklist_author,booklist_userid)   
+         values 
+         (#{booklist_cover,jdbcType=VARCHAR},
+          #{booklist_name,jdbcType=VARCHAR},#{booklist_intro,jdbcType=VARCHAR},
+          #{booklist_author,jdbcType=VARCHAR},#{booklist_userid,jdbcType=INTEGER}) 
+    </insert>  
+    
+    <delete id="deleteBooklist"  parameterType="java.lang.Integer">
+     delete from booklist where booklist_id=#{booklist_id}
+    </delete> 
     
     </mapper>

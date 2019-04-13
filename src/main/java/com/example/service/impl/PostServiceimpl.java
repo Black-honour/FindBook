@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Post;
+import com.example.mapper.PostCustomMapper;
 import com.example.mapper.PostMapper;
-import com.example.mapper.PostMapperCustom;
 import com.example.pojo.Page;
 import com.example.pojo.PostCustom;
 import com.example.service.PostService;
@@ -21,7 +21,7 @@ public class PostServiceimpl implements PostService{
 	private PostMapper postMapper;
 	
 	@Autowired
-	private PostMapperCustom postMapperCustom;
+	private PostCustomMapper postMapperCustom;
 	
 	public int insert(Post post) {
 		return postMapper.insert(post);

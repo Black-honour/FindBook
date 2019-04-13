@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.Book;
 import com.example.entity.Booklist;
 import com.example.entity.BooklistMinute;
+import com.example.mapper.BookMapper;
 import com.example.service.BooklistService;
 import com.example.utils.ResultData;
 
@@ -19,8 +20,10 @@ public class BooklistController {
 
 	 @Autowired
 	 private BooklistService booklistService;
+	 @Autowired
+	 private BookMapper bookMapper;
 	 
-	 @ResponseBody//搜索书单
+	@ResponseBody//搜索书单
 	 @RequestMapping(value="/returnbooklist",produces = { "application/json;charset=UTF-8"},
 	    method = RequestMethod.POST)
 	 ResultData<Booklist> selectBook(
@@ -44,19 +47,28 @@ public class BooklistController {
 	 @RequestMapping(value="/addbooklist",produces = { "application/json;charset=UTF-8"},
 	    method = RequestMethod.POST)
 	 ResultData<Booklist> addBooklist(
-	    		@RequestParam(value = "booklist_id", required = true) Integer booklist_id,
 	    		@RequestParam(value = "booklist_name", required = true) String booklist_name,
 	    		@RequestParam(value = "booklist_intro", required = true) String booklist_intro,
-	    		@RequestParam(value = "booklist_cover", required = true) String booklist_cover
+	    		@RequestParam(value = "booklist_cover", required = true) String booklist_cover,
+	    		@RequestParam(value = "booklist_author", required = true) String booklist_author,
+	    		@RequestParam(value = "booklist_userid", required = true) Integer booklist_userid
 	    		){
 	    	ResultData<Booklist> resultData=new ResultData<>();
-	    	Booklist booklist=new Booklist();
-	    	booklist.setBooklist_cover(booklist_cover);
-	    	booklist.setBooklist_Id(booklist_id);
-	    	booklist.setBooklist_name(booklist_name);
-	    	booklist.setBooklist_intro(booklist_intro);
+	    	if(booklistService.isnewBooklistname(booklist_name)){
+				resultData.setCode(300);
+				resultData.setMsg("书单名重复");
+				resultData.setSuccess(false);
+				return resultData;
+			}
 	    	try {
-	    	     resultData=booklistService.interBooklist(booklist);
+	    		Booklist booklist=new Booklist();
+	    		
+		    	booklist.setBooklist_cover(booklist_cover);
+		    	booklist.setBooklist_name(booklist_name);
+		    	booklist.setBooklist_intro(booklist_intro);
+		    	booklist.setBooklist_author(booklist_author);
+		    	booklist.setBooklist_userid(booklist_userid);
+	    	    resultData=booklistService.interBooklist(booklist);
 			} catch (Exception e) {
 				e.printStackTrace();
 				//LogUtils.error(e.toString());
@@ -68,7 +80,7 @@ public class BooklistController {
 	    	return resultData;
 	    }
 	 
-	 @ResponseBody//添加书单
+	 @ResponseBody//删除书单
 	 @RequestMapping(value="/deletebooklist",produces = { "application/json;charset=UTF-8"},
 	    method = RequestMethod.POST)
 	 ResultData<Booklist> deleteBooklist(
@@ -87,25 +99,23 @@ public class BooklistController {
 			}
 	    	return resultData;
 	    }
-	 
+	
 	 @ResponseBody//书单中添加图书
 	 @RequestMapping(value="/addbooklistbook",produces = { "application/json;charset=UTF-8"},
 	    method = RequestMethod.POST)
 	 ResultData<BooklistMinute> addBooklist(
 	    		@RequestParam(value = "booklist_id", required = true) Integer booklist_id,
-	    		@RequestParam(value = "bookid", required = true) Integer bookid,
-	    		@RequestParam(value = "book_name", required = true) String book_name,
-	    		@RequestParam(value = "book_intro", required = true) String book_intro,
-	    		@RequestParam(value = "book_cover", required = true) String book_cover,
-	    		@RequestParam(value = "author", required = true) String author
+	    		@RequestParam(value = "bookid", required = true) Integer bookid
 	    		){
 	    	ResultData<BooklistMinute> resultData=new ResultData<>();
+	    	Book book =bookMapper.selectBookid(bookid);
 	    	BooklistMinute booklistminute=new BooklistMinute();
-	    	booklistminute.setBook_cover(book_cover);
+	    	booklistminute.setBook_cover(book.getBook_cover());
+	    	booklistminute.setBookid(bookid);
 	    	booklistminute.setBooklist_id(booklist_id);
-	    	booklistminute.setBook_name(book_name);
-	    	booklistminute.setBook_intro(book_intro);
-	    	booklistminute.setAuthor(author);
+	    	booklistminute.setBook_name(book.getBook_name());
+	    	booklistminute.setBook_intro(book.getBook_intro());
+	    	booklistminute.setAuthor(book.getAuthor());
 	    	try {
 	    	     resultData=booklistService.interBooklistMinute(booklistminute);
 			} catch (Exception e) {
@@ -119,15 +129,14 @@ public class BooklistController {
 	    	return resultData;
 	    }
 	 
-	 @ResponseBody//书单中添加图书
+	 @ResponseBody//书单中删除图书
 	 @RequestMapping(value="/deletebooklistbook",produces = { "application/json;charset=UTF-8"},
 	    method = RequestMethod.POST)
 	 ResultData<BooklistMinute> deleteBooklist(
 	    		@RequestParam(value = "booklist_id", required = true) Integer booklist_id,
 	    		@RequestParam(value = "bookid", required = true) Integer bookid
 	    		){
-	    	ResultData<BooklistMinute> resultData=new ResultData<>();
-	    	
+	    	ResultData<BooklistMinute> resultData=new ResultData<>();	    	
 	    	try {
 	    	     resultData=booklistService.deleteBooklistMinute(booklist_id,bookid);
 			} catch (Exception e) {

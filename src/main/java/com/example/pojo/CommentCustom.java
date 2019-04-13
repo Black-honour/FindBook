@@ -1,6 +1,6 @@
-/*package com.example.pojo;
+package com.example.pojo;
 
-import com.lqm.home.po.Comment;
+import com.example.entity.Comment;
 
 public class CommentCustom extends Comment{
 	private Page page;
@@ -17,4 +17,4 @@ public class CommentCustom extends Comment{
 		this.page = page;
 	}
 
-}*/
+}

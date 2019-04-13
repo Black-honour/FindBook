@@ -9,7 +9,7 @@ public interface BooklistMapper {
 	
 	Booklist selectBooklistName(String booklist_name);
 	
-	List<Booklist> selectBooklists(int n);//返回n个书单
+	//List<Booklist> selectBooklists(int n);//返回n个书单
 	
 	void interBooklist(Booklist booklist);//新建书单
 
