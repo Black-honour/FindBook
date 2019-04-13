@@ -67,8 +67,8 @@ public class PostServiceimpl implements PostService{
 	}
 
 	
-	public int countByHomeid(Integer homeid) {
-		return postMapper.countByExample(homeid);//返回讨论区总行数
+	public int countByHomeid(Integer forumid) {
+		return postMapper.countByExample(forumid);//返回讨论区总行数
 	}
 	
 

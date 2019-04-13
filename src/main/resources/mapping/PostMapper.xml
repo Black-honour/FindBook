@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.PostMapper">
- 
-    <resultMap id="BaseResultMap" type="com.example.entity.Post">
+  <resultMap id="BaseResultMap" type="com.example.entity.Post">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column ="accid" jdbcType="VARCHAR" property="accid"/>
         <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="userphoto" jdbcType="VARCHAR" property="userphoto" />
         <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="content" jdbcType="VARCHAR" property="content" />
         <result column="contentImg" jdbcType="VARCHAR" property="contentImg" />
@@ -14,31 +14,31 @@
          <result column="commentNum" jdbcType="INTEGER" property="commentNum" />
         <result column="forumId" jdbcType="INTEGER" property="forumId" />
     </resultMap>
-    <select id ="countByExample" resultType="java.lang.Integer">
-    selcet count(1) from post where id =#{id}
+     <select id ="countByExample" resultType="java.lang.Integer">
+    select count(1) from post where forumid =#{forumid}
     </select>
     
-    <delect id ="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id ="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from post
     where id = #{id,jdbcType=INTEGER}
-    </delect>
+    </delete>
     
-    <select id ="selectByPrimaryKey"  parameterType="java.lang.Integer" resultType="com.exmaple.entity.post">
+    <select id ="selectByPrimaryKey"  parameterType="java.lang.Integer" resultType="com.example.entity.Post">
     select *from post where id =#{id}
     </select>
     
-    <insert id="insert" parameterType="com.lqm.home.po.Post" >
-    insert into post (id, useraccount,username, userphoto, 
-      title, content, content_img, 
-      current_position, create_time, comment_num, 
-      village_id)
-    values (#{id,jdbcType=INTEGER}, #{useraccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, 
+    <insert id="insert" parameterType="com.example.entity.Post" useGeneratedKeys="true" keyProperty="id">
+    insert into post (accid,username, userphoto, 
+      title, content, contentimg, 
+      currentposition, createtime, commentnum, 
+      forumid)
+    values ( #{accid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{contentImg,jdbcType=VARCHAR}, 
       #{currentPosition,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{commentNum,jdbcType=VARCHAR}, 
-      #{villageId,jdbcType=INTEGER})
+      #{forumId,jdbcType=INTEGER})
   </insert>
   
-  <insert id ="insertList" parameterType="com.example.entity.Post">
+  <!--<insert id ="insertList" parameterType="com.example.entity.Post">
   insert into post (id, useraccount,username, userphoto, 
       title, content, content_img, 
       current_position, create_time, comment_num, 
@@ -49,7 +49,7 @@
       #{currentPosition,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{commentNum,jdbcType=VARCHAR}, 
       #{villageId,jdbcType=INTEGER}
       </foreach>
-  </insert>
+  </insert>-->
   
   <update id ="updateByExample"  parameterType="map">
   update post

@@ -14,9 +14,9 @@ public interface PostMapper {
 
     int insert(Post post);//插入帖子
     
-    void insert(List<Post> post);//批量插入
+    //void insert(List<Post> post);//批量插入
 
     Post selectByPrimaryKey(Integer id);//
 
-    int updateByExample( Post record);
+    int updateByExample(@Param("record")Post record);
 }

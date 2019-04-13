@@ -32,7 +32,7 @@ public class PostController {
 	/***
 	 * 创建帖子
 	 */
-	@RequestMapping(value = "createPost", produces = { "application/json;charset=UTF-8" },
+	@RequestMapping(value = "/createPost", produces = { "application/json;charset=UTF-8" },
 			method = RequestMethod.POST)
 	@ResponseBody
 	public ResultData<Post> createPost(
@@ -43,7 +43,6 @@ public class PostController {
 			@RequestParam(value = "content", required = true) String content,
 			@RequestParam(value = "contentImg", required = true) String contentImg,
 			@RequestParam(value = "currentPosition", required = true) String currentPosition,
-			@RequestParam(value = "createTime", required = true) String createTime,
 			@RequestParam(value = "forumId", required = true) Integer forumId,
 			HttpServletRequest request,
 			@RequestParam(value="img",required = false)List<MultipartFile> img
@@ -77,7 +76,9 @@ public class PostController {
 		post.setCreateTime(TimeUtil.getCurrentTimeString());
 		post.setForumId(forumId);
 		
-		int postid = postService.insert(post);
+		
+		postService.insert(post);
+		int postid = post.getId();
 		Post returnpost = postService.selectByPrimaryKey(postid);
 		
 		ResultData<Post> resultData = new ResultData<>();
@@ -91,7 +92,8 @@ public class PostController {
 	/***
 	 * 返回帖子
 	 */
-	@RequestMapping(value = "getPosts", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.GET)
+	@RequestMapping(value = "getPosts", produces = { "application/json;charset=UTF-8" },
+			method = RequestMethod.POST)
 	@ResponseBody
 	public ResultData<List<Post>> getPosts(
 			@RequestParam(value = "forumid", required = true) Integer forumid,//乡吧id
@@ -111,17 +113,84 @@ public class PostController {
 	/***
 	 * 根据id查询帖子
 	 */
-	@RequestMapping(value = "getPostById", produces = { "application/json;charset=UTF-8" }, method = RequestMethod.GET)
+	@RequestMapping(value = "getPostById", produces = { "application/json;charset=UTF-8" },
+			method = RequestMethod.POST)
 	@ResponseBody
 	public ResultData<Post> getPostById(
-			@RequestParam(value = "postid", required = true) Integer postid
+			@RequestParam(value = "id", required = true) Integer id
 			) throws Exception {
 		
 		ResultData<Post> resultData = new ResultData<>();
-		Post post = postService.selectByPrimaryKey(postid);
+		Post post = postService.selectByPrimaryKey(id);
 		resultData.setData(post);
 		resultData.setCode(200);
 		resultData.setMsg("查询成功");
 		return resultData;
 	}
+	
+	//更新帖子
+	@RequestMapping(value = "updatePost", produces = { "application/json;charset=UTF-8" },
+			method = RequestMethod.POST)
+	@ResponseBody
+	public ResultData<Post> updatePost(
+			@RequestParam(value = "id", required = true) Integer id,
+			@RequestParam(value = "title", required = true) String title,
+			@RequestParam(value = "content", required = true) String content,
+			@RequestParam(value = "contentImg", required = true) String contentImg,
+			@RequestParam(value = "currentPosition", required = true) String currentPosition,
+			HttpServletRequest request,
+			@RequestParam(value="img",required = false)List<MultipartFile> img
+			) throws Exception {
+		
+		Post post = new Post();
+		
+		if(img != null){
+			String path = "";
+			JSONArray jsonArray = new JSONArray();
+			JSONObject jsonObject;
+			int i = 1;
+			for(MultipartFile f : img){
+				jsonObject = new JSONObject();
+				jsonObject.put("id", i);
+				path = ImgUtil.saveImgInUserFolder(request, f, f.getOriginalFilename(), 
+						"/upload/img/"+TimeUtil.getWeeksOneDate());
+				jsonObject.put("path", path);
+				jsonArray.add(jsonObject);
+				i++;
+			}
+			post.setContentImg(jsonArray.toString());
+		}
+		post.setTitle(title);
+		post.setContent(content);
+		post.setCurrentPosition(currentPosition);
+		post.setCreateTime(TimeUtil.getCurrentTimeString());
+		
+		postService.update(post);
+		Post returnpost = postService.selectByPrimaryKey(id);
+		
+		ResultData<Post> resultData = new ResultData<>();
+		resultData.setData(returnpost);
+		resultData.setCode(200);
+		resultData.setMsg("更新成功");
+		System.out.println("返回数据:"+resultData.toString());
+		return resultData;		
+	}
+	
+	//删除帖子
+	@RequestMapping(value = "deletePost", produces = { "application/json;charset=UTF-8" },
+			method = RequestMethod.POST)
+	@ResponseBody
+	public ResultData<Post> deletePost(
+			@RequestParam(value = "id", required = true) Integer id
+			){
+		ResultData<Post> resultData=new ResultData<>();
+		postService.deleteByPrimaryKey(id);
+		Post post=postService.selectByPrimaryKey(id);
+		resultData.setData(post);
+		resultData.setCode(1);
+		resultData.setMsg("删除成功");
+		resultData.setSuccess(true);
+		return resultData;
+	}
+	
 }

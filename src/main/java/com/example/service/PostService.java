@@ -15,4 +15,5 @@ public interface PostService {
 			 throws Exception;//返回论坛帖子列表帖子
 
 	 Post selectByPrimaryKey(Integer id);//根据id查找帖子
+	 int deleteByPrimaryKey(Integer id);
 }
