@@ -13,4 +13,6 @@ public interface CommentService {
 	void insert(Comment record);  
 	 
 	Comment selectByPrimaryKey(Integer id);
+	
+	int delete(Integer commentid);
 }

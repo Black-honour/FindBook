@@ -1,9 +1,9 @@
 package com.example.entity;
 
 public class Comment {
-	private Integer forumid;
+	private Integer commentid;//评论id
 
-    private Integer commentid;//评论id
+    private Integer postid;//帖子id
 
     private Integer userid;//用户id
     
@@ -21,20 +21,20 @@ public class Comment {
 
     private String createTime;//时间
 
-    public Integer getforumId() {
-        return forumid;
-    }
-
-    public void setforumId(Integer forumid) {
-        this.forumid = forumid;
-    }
-
     public Integer getCommentid() {
         return commentid;
     }
 
     public void setCommentid(Integer commentid) {
         this.commentid = commentid;
+    }
+
+    public Integer getPostid() {
+        return postid;
+    }
+
+    public void setPostid(Integer postid) {
+        this.postid = postid;
     }
 
     public Integer getUserid() {

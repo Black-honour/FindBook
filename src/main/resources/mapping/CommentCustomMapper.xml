@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.mapper.CommentMapperCustom" >
+<mapper namespace="com.example.mapper.CommentCustomMapper" >
 	
-	<select id="selectCommentsPageByPostId" parameterType="com.example.entity.CommentCustom" 
+	<select id="selectCommentsPageByPostId" parameterType="com.example.pojo.CommentCustom" 
 	resultType="com.example.entity.Comment">
 		select * from comment
 		<if test="postid != -1">
 			<where>
-				commentid = #{commentid} 
+				postid = #{postid} 
 			</where>
 		</if>
-		order by create_time asc
+		order by createTime asc
 		<include refid="pageSQL"></include>
 	</select>
 
 	<insert id="insertCommentGetCommentId" parameterType="com.example.entity.Comment">
-		<selectKey keyProperty="forumid" order="AFTER" resultType="java.lang.Integer">
+		<selectKey keyProperty="commentid" order="AFTER" resultType="java.lang.Integer">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
-		insert into comment (forumid, commentid, userid,
+		insert into comment (postid, commentid, userid,
 		accid,username, userphoto, content,
 		contentImg, floor, createTime
 		)
-		values (#{forumid,jdbcType=INTEGER}, #{commentid,jdbcType=INTEGER},
+		values (#{postid,jdbcType=INTEGER}, #{commentid,jdbcType=INTEGER},
 		#{userid,jdbcType=INTEGER},#{accid,jdbcType=VARCHAR},
 		#{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
 		#{contentImg,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER},

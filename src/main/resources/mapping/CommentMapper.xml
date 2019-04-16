@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.mapper.CommentMapper" >
   <resultMap id="BaseResultMap" type="com.example.entity.Comment" >
-    <id column="forumid" property="forumid" jdbcType="INTEGER" />
-    <result column="commentid" property="commentid" jdbcType="INTEGER" />
+    <id column="commentid" property="commentid" jdbcType="INTEGER" />
+    <result column="postid" property="postid" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="accid" property="accid" jdbcType="VARCHAR" />
@@ -15,27 +15,27 @@
   </resultMap>
   
   <insert id="insert" parameterType="com.example.entity.Comment" >
-    insert into comment (forumid,commentid,userid, accid,
+    insert into comment (postid,commentid,userid, accid,
       username, userphoto, content, 
       content_img, floor, create_time
       )
-    values (#{forumid,jdbcType=INTEGER},#{commentid,jdbcType=INTEGER} #{userid,jdbcType=INTEGER}, #{accid,jdbcType=VARCHAR},
+    values (#{postid,jdbcType=INTEGER},#{commentid,jdbcType=INTEGER} #{userid,jdbcType=INTEGER}, #{accid,jdbcType=VARCHAR},
       #{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
       #{contentImg,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}
       )
   </insert>
   
-  <select id =" selectByPrimaryKey" resultType="com.example.entity.Comment">
+  <select id ="selectByPrimaryKey" resultType="com.example.entity.Comment">
   select *from comment where commentid =#{commentid,jdbcType=INTEGER}
   </select>
   
-   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from comment
     where commentid = #{commentid,jdbcType=INTEGER}
   </delete>
   
-  <select id="countByExample" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
-    select count(1) from comment where forumid=#{forumid}   
+  <select id="countByExample" resultType="java.lang.Integer" >
+    select count(1) from comment where postid=#{postid}   
   </select>
   
   

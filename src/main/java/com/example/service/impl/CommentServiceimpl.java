@@ -11,12 +11,13 @@ import com.example.mapper.CommentCustomMapper;
 import com.example.mapper.CommentMapper;
 import com.example.pojo.CommentCustom;
 import com.example.pojo.Page;
+import com.example.service.CommentService;
 import com.example.utils.PageUtils;
 import com.example.utils.ResultData;
 
 @Transactional
 @Service
-public class CommentServiceimpl {
+public class CommentServiceimpl implements CommentService{
 
 
 	@Autowired
@@ -33,7 +34,7 @@ public class CommentServiceimpl {
 	public ResultData<List<Comment>> selectComments(Integer currentPage, Integer pageCount, 
 			Integer postid) throws Exception {
 		CommentCustom custom=new CommentCustom();
-		custom.setCommentid(postid);
+		custom.setPostid(postid);
 		Page page;
 		ResultData<List<Comment>> resultData = new ResultData<>();
 		if(currentPage>=2){
@@ -44,6 +45,7 @@ public class CommentServiceimpl {
 			page = PageUtils.createPage(pageCount, currentPage);
 		}else{
 			int count = countCommentBypostid(postid);
+			//System.out.println(count);
 			if(count == 0){
 //				json.put("pageNum", count);
 				resultData.setData(null);
@@ -59,8 +61,8 @@ public class CommentServiceimpl {
 		return resultData;
 	}
 	
-	public int countCommentBypostid(int commentid) {
-		return commentMapper.countByExample(commentid);
+	public int countCommentBypostid(int postid) {
+		return commentMapper.countByExample(postid);
 	}
 
 
@@ -71,5 +73,9 @@ public class CommentServiceimpl {
 
 	public Comment selectByPrimaryKey(Integer id) {
 		return commentMapper.selectByPrimaryKey(id);
+	}
+	
+	public int delete(Integer commentid) {
+		return commentMapper.deleteByPrimaryKey(commentid);
 	}
 }
