@@ -54,9 +54,6 @@
   <update id ="updateByExample"  parameterType="map">
   update post
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
       <if test="record.accid != null" >
         accid = #{record.accid,jdbcType=VARCHAR},
       </if>
@@ -88,6 +85,10 @@
         forumId = #{record.forumId,jdbcType=INTEGER},
       </if>
     </set>
+    where
+    <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER}
+      </if>
   </update>
     
     </mapper>

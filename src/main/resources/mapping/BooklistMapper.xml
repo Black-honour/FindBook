@@ -24,9 +24,8 @@
     
     <select id="selectBooklistName" resultType="com.example.entity.Booklist">
     select *from booklist where booklist_name=#{booklist_name}
-    </select><!--
-    
-    <select id="selectBooklists" resultType="com.example.entity.Booklist">
+    </select>
+    <!--<select id="selectBooklists" resultType="com.example.entity.Booklist">
     select *from booklist limit 4,5;
     </select>-->
     

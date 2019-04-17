@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RemarkMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.Remark">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column ="accid" jdbcType="VARCHAR" property="accid"/>
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="userphoto" jdbcType="VARCHAR" property="userphoto" />    
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="woundful" jdbcType="INTEGER" property="woundful"/>
+        <result column="stamp" jdbcType="INTEGER" property="stamp" />
+        <result column="star" jdbcType="INTEGER" property="star" />
+        <result column="currentPosition" jdbcType="VARCHAR" property="currentPosition" />
+        <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+        <result column="forumId" jdbcType="INTEGER" property="forumId" />
+    </resultMap>
+    <select id ="countByExample" resultType="java.lang.Integer">
+    select count(1) from remark where forumid =#{forumid}
+    </select>
+    
+    <delete id ="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from remark
+    where id = #{id,jdbcType=INTEGER}
+    </delete>
+    
+    <select id ="selectByPrimaryKey"  parameterType="java.lang.Integer" resultType="com.example.entity.Remark">
+    select *from remark where id =#{id}
+    </select>
+    
+    <insert id="insert" parameterType="com.example.entity.Remark" useGeneratedKeys="true" keyProperty="id">
+    insert into remark (accid,username, userphoto, 
+      content, currentposition, createtime, 
+      woundful,stamp,star, 
+      forumid)
+    values ( #{accid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userphoto,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR},  #{currentPosition,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
+       #{woundful,jdbcType=INTEGER}, #{stamp,jdbcType=INTEGER}, #{star,jdbcType=INTEGER}, 
+      #{forumId,jdbcType=INTEGER})
+  </insert>
+  
+  <update id ="updateByExample"  parameterType="map">
+  update remark
+    <set >
+      <if test="record.accid != null" >
+        accid = #{record.accid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userphoto != null" >
+        userphoto = #{record.userphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentPosition != null" >
+        currentPosition = #{record.currentPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        createTime = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+     <if test="record.woundful != null" >
+        woundful = #{record.woundful,jdbcType=INTEGER},
+      </if>
+      <if test="record.stamp != null" >
+        stamp = #{record.stamp,jdbcType=INTEGER},
+      </if>
+      <if test="record.star != null" >
+        star = #{record.star,jdbcType=INTEGER},
+      </if>
+      <if test="record.forumId != null" >
+        forumId = #{record.forumId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where
+    <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER}
+      </if>
+  </update>
+    </mapper>

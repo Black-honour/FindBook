@@ -2,6 +2,8 @@ package com.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.example.entity.Ad;
 
 public interface AdMapper {
@@ -12,7 +14,7 @@ public interface AdMapper {
 
     Ad select(Integer id);
     
-    List<Ad> selectAds(int[] ad);
+    List<Ad> selectAds();//获取四条广告
 
-    int update(Ad record);
+    int update(@Param("record") Ad record);
 }
